@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <dirent.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#include <errno.h>
+
+#define TAM_BUFFER 512
+
+int main ( int argc , char *argv[]){
+
+        /**extern int errno;
+        *if (argc != 4){
+        *       printf("Número de argumentos erróeo \n");
+        *       return (1);
+        *}
+        */
+
+        DIR *dir;
+        int arch = 0;
+
+        dir = opendir(argv[0]);
+        if(dir == NULL){
+                printf("Directorio vacio \n");
+                return(1);
+        }
+
+        int i = argv[2];
+        int j = argv[3];
+        FILE *dat;
+        dat = fopen(argv[1]," +r");
+
+        while (i <= j) {
+                seekdir(argv[1], i);
+                if (symlink(readdir(i),readdir(i)) == 0){
+                        dat = fopen(readdir(i), "+r");
+                        fputc(dat, "a");
+                        i++;
+                }else{
+                        i++;
+                }
+
+
+        }
+        fclose(dat);
+        closedir(dir);
+	return (0);
+}
