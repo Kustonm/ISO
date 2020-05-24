@@ -21,7 +21,8 @@ char error[512];
 struct dirent *dir;
 char aux[512];
 char path[512];
-dir =readdir(d)
+d = opendir(argv[1]);
+dir =readdir(d);
 	
 while((dir != NULL)){
 	if (dir -> d_type == 8){
