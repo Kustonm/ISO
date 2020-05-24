@@ -12,6 +12,11 @@
 
 int main (int argc , char *argv[]){
 
-
+  DIR *d;
+  
+  struct dirent *dir;
+  
+  
+ 
 
 }
