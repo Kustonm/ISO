@@ -28,7 +28,8 @@ if ( i == 0){
 }
 
 while ((dir = readdir(d) != NULL && i <= j)){
-	if( symlink_exists(
+	if( symlink_exists(readdir(d)) == TRUE){
+		
 	
 	
 	i++;
