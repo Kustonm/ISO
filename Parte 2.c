@@ -16,7 +16,16 @@ int main (int argc , char *argv[]){
   
   struct dirent *dir;
   
+  if (d == NULL){
+    printf("No se a podido abrir");
+    return (0);
+  }
   
- 
+  while((dir == readdir(d) != NULL){
+      if 
+  }
+      
+ closedir(d);
+ return(0);
 
 }
