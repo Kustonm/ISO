@@ -23,50 +23,56 @@ char aux[512];
 char path[512];
 d = opendir(argv[1]);
 dir =readdir(d);
-	
+
 while((dir != NULL)){
-	if (dir->d_type == DT_LNK){
+	if ((dir->d_type & DT_LNK == 0) && (dir->d_type & DT_REG != 0) ){
 		sprintf(path,"./%s/%s", argv[1], dir->d_name);
-		if (open(path, O_RDONLY) == -1){
+		}
+		int auxF  = open(path, O_RDONLY);
+		
+		if (auxF == -1){
 			sprintf(error, "No se puede abiri el fichero\n",dir->d_name); 
 			perror(error);
 		}
-		if(lseek(open(path, O_RDONLY), 0, SEEK_END) < Pos1){
+	
+		int lenght = lseek(auxF, 0, SEEK_END);
+		
+		if(lenght < Pos1){
 			sprintf(error, "Fuera del limite %d.\n",dir->d_name);
 			perror(error);
 		}
-		 if ((lseek(open(path, O_RDONLY), 0, SEEK_END) < Pos2)){
-		 	if ((lseek(open(path, O_RDONLY), 0, SEEK_END) - Pos1 > 512)){
-				while((open(path, O_RDONLY)) - Pos1  > 512){
-					lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
-					read(open(path, O_RDONLY),aux,512);
+		 if (lenght < Pos2){
+		 	if ((lenght - Pos1) > 512){
+				while(lenght - Pos1  > 512){
+					lseek(auxF,Pos1,SEEK_SET);
+					read(auxF,aux,512);
 					write(fich,aux,512);
 				}
-				lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
-				read(open(path, O_RDONLY), 0, SEEK_END),aux,((lseek(open(path, O_RDONLY), 0, SEEK_END) - Pos1));
-				write(fich,aux,(lseek(open(path, O_RDONLY), 0, SEEK_END)- Pos1));
+				lseek(auxF,Pos1,SEEK_SET);
+				read(auxF,aux,(lenght - Pos1));
+				write(fich,aux,(lenght- Pos1));
 		}else{
 			if ((Pos2 - Pos1) > 512 ){
 				while( Pos2 - Pos1 > 512){
-					lseek(open(path, O_RDONLY), Pos1 ,SEEK_SET);
-					read(open(path, O_RDONLY), aux, 512);
+					lseek(auxF, Pos1 ,SEEK_SET);
+					read(auxF, aux, 512);
 					write(fich,aux,512);
 				}
-				lseek((open(path, O_RDONLY)),Pos1,SEEK_SET);
-				read(open(path, O_RDONLY),aux,(Pos2 -Pos1));
+				lseek(auxF,Pos1,SEEK_SET);
+				read(auxF,aux,(Pos2 -Pos1));
 				write(fich,aux,(Pos2 -Pos1));
 		      }else{
-		      		lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
-				read(open(path, O_RDONLY),aux,Pos2);
+		      		lseek(auxF,Pos1,SEEK_SET);
+				read(auxF,aux,Pos2);
 				write(fich,aux,Pos2);
 	}
 	}
 
 }
 
-close(d);
+closedir(d);
 close(fich);
 return(0);
 }
 }
-}
+
