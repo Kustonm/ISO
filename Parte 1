@@ -25,11 +25,11 @@ char path[512];
 while((dir =readdir(d) != NULL)){
 	if (dir -> d_type == 8){
 		sprintf(path,"./%s/%s", argv[1], dir->d_name);
-	//fAuxi	if (open(path, O_RDONLY) == -1){
+		if (open(path, O_RDONLY) == -1){
 			sprintf(error, "No se puede abiri el fichero\n",dir->d_name); 
 			perror(error);
 		}
-//lenght	if(lseek(open(path, O_RDONLY), 0, SEEK_END)){
+		if(lseek(open(path, O_RDONLY), 0, SEEK_END)){
 			sprint(error, "Fuera del limite %d.\n",dir->d_name);
 			perror(error);
 		}
@@ -58,11 +58,13 @@ while((dir =readdir(d) != NULL)){
 				read(open(path, O_RDONLY),aux,Pos2);
 				write(fich,aux,Pos2);
 	}
+	}
 
 }
 
 close(d);
 close(fich);
 return(0);
+}
 }
 }
