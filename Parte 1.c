@@ -25,7 +25,7 @@ d = opendir(argv[1]);
 dir =readdir(d);
 	
 while((dir != NULL)){
-	if (dir -> d_type == 8){
+	if (dir->d_type == DT_LNK){
 		sprintf(path,"./%s/%s", argv[1], dir->d_name);
 		if (open(path, O_RDONLY) == -1){
 			sprintf(error, "No se puede abiri el fichero\n",dir->d_name); 
