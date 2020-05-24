@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <string.h>
 #include <dirent.h>
@@ -12,40 +13,27 @@
 
 int main ( int argc , char *argv[]){
 
-        /**extern int errno;
-        *if (argc != 4){
-        *       printf("Número de argumentos erróeo \n");
-        *       return (1);
-        *}
-        */
+char *listaArchivos[] = (char**)(malloc(sizeof(char *) * argc));
+output = argv[2]; //Resultado.dat
+DIR *d;
+struct dirent *dir;
+d = opendir(argv[1]); //directorio
+int  i = argv[3]; //Pos1
+int j= argv[4]; //Pos2
 
-        DIR *dir;
-        int arch = 0;
+if ( i == 0){
+	seekdir(0);
+}else{
+	seekdir(i-1);
+}
 
-        dir = opendir(argv[0]);
-        if(dir == NULL){
-                printf("Directorio vacio \n");
-                return(1);
-        }
+while ((dir = readdir(d) != NULL && i <= j)){
+	if( symlink_exists(
+	
+	
+	i++;
 
-        int i = argv[2];
-        int j = argv[3];
-        FILE *dat;
-        dat = fopen(argv[1]," +r");
-
-        while (i <= j) {
-                seekdir(argv[1], i);
-                if (symlink(readdir(i),readdir(i)) == 0){
-                        dat = fopen(readdir(i), "+r");
-                        fputc(dat, "a");
-                        i++;
-                }else{
-                        i++;
-                }
-
-
-        }
-        fclose(dat);
-        closedir(dir);
-	return (0);
+}
+closedir(d);
+return(0);
 }
