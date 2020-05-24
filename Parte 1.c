@@ -32,7 +32,7 @@ while((dir != NULL)){
 			perror(error);
 		}
 		if(lseek(open(path, O_RDONLY), 0, SEEK_END) < Pos1){
-			sprint(error, "Fuera del limite %d.\n",dir->d_name);
+			sprintf(error, "Fuera del limite %d.\n",dir->d_name);
 			perror(error);
 		}
 		 if ((lseek(open(path, O_RDONLY), 0, SEEK_END) < Pos2)){
