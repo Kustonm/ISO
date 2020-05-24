@@ -21,8 +21,9 @@ char error[512];
 struct dirent *dir;
 char aux[512];
 char path[512];
-
-while((dir =readdir(d) != NULL)){
+dir =readdir(d)
+	
+while((dir != NULL)){
 	if (dir -> d_type == 8){
 		sprintf(path,"./%s/%s", argv[1], dir->d_name);
 		if (open(path, O_RDONLY) == -1){
