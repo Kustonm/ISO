@@ -9,32 +9,58 @@
 
 #include <errno.h>
 
-#define TAM_BUFFER 512
+int main (int argc , char *argv[]){
 
-int main ( int argc , char *argv[]){
-
-char *listaArchivos[] = (char**)(malloc(sizeof(char *) * argc));
-output = argv[2]; //Resultado.dat
 DIR *d;
+int fich = open(argv[2], O_WRONLY|O_APPEND|O_CREAT, 0600));
+int Pos1;
+int Pos2;
+
+char error[512];
 struct dirent *dir;
-d = opendir(argv[1]); //directorio
-int  i = argv[3]; //Pos1
-int j= argv[4]; //Pos2
+char aux[512];
+char path[512];
 
-if ( i == 0){
-	seekdir(0);
-}else{
-	seekdir(i-1);
+while((dir =readdir(d) != NULL)){
+	if (dir -> c_type == 8){
+		sprintf(path,"./%s/%s, argv[1], dir->d_name);
+	//fAuxi	if (open(path, O_RDONLY) == -1){
+			sprintf(error, "No se puede abiri el fichero"); 
+			perror(error)
+		}
+//lenght	if(lseek(open(path, O_RDONLY), 0, SEEK_END)){
+			sprint(error, "Fuera del limite");
+			perror(error);
+		}
+		 if ((lseek(open(path, O_RDONLY), 0, SEEK_END) < Pos2){
+		 	if ((lseek(open(path, O_RDONLY), 0, SEEK_END) - Pos1 > 512){
+				while((lseek(open(path, O_RDONLY) - Pos1  > 512){
+					lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
+					read(open(path, O_RDONLY),aux,512);
+					write(fich,aux,512);
+				}
+				lseek((lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
+				read((lseek(open(path, O_RDONLY),aux,((lseek(open(path, O_RDONLY), 0, SEEK_END) - Pos1));
+				write(fich,aux,((lseek(open(path, O_RDONLY), 0, SEEK_END) - Pos1));
+		}else{
+			if ((Pos2 - Pos1) > 512 ){
+				while( Pos2 - Pos1 > 512){
+					lseek((lseek(open(path, O_RDONLY), Pos1 ,SEEK_SET);
+					read( (lseek(open(path, O_RDONLY), aux, 512);
+					write(fich,aux,512);
+				}
+				lseek((lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
+				read((lseek(open(path, O_RDONLY),aux,(Pos2 -Pos1);
+				write(fich,aux,(Pos2 -Pos1));
+		      }else{
+		      		lseek((lseek(open(path, O_RDONLY),Pos1,SEEK_SET);
+				read((lseek(open(path, O_RDONLY),aux,Pos2);
+				write(fich,aux,Pos2);
+	}
+
 }
 
-while ((dir = readdir(d) != NULL && i <= j)){
-	if( symlink_exists(readdir(d)) == TRUE){
-		
-	
-	
-	i++;
-
-}
-closedir(d);
+close(d);
+close(fich);
 return(0);
 }
