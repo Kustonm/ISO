@@ -9,32 +9,34 @@
 
 
 int main() {
-    int pfd[2];
-    int pfd2[2];
+    int p1[2];
+    int p2[2];
     int pid;
 
-    pipe(pfd);
-    pipe(pfd2);
+    pipe(p1);
+    pipe(p2);
 
-    if((pid = fork()) == 0) {
+    pid = fork();    
+    
+    if((pid == 0) {
         
         if(close(1) == -1){
           printf("Error al cerrar el canal 1.\n");
         }
-        if(dup(pfd[1]) == -1){
+        if(dup(p1[1]) == -1){
           printf("Error dup.\n");
           
         }
-        if((close(pfd[1])) == -1){ 
+        if((close(p1[1])) == -1){ 
             printf("Error al cerrar pfd[1].\n");
         }
-        if((close(pfd[0])) == -1){
+        if((close(p1[0])) == -1){
           printf("Error al cerrar pfd[0].\n");
         }
-        if((close(pfd2[0])) == -1){
+        if((close(p2[0])) == -1){
           printf("Error al cerrar pfd2[0].\n");
         }
-        if((close(pfd2[1])) == -1){
+        if((close(p2[1])) == -1){
           printf("Error al cerrar pfd2[1].\n");
         }
 
@@ -45,28 +47,28 @@ int main() {
     printf("No ha sido posible crear el primer hijo.\n");
     }
   
-    if((pid = fork()) == 0) {
-        if(close(0) == -1){ error("Error al cerrar el canal 0.\n"); 
+    if((pid == 0) {
+        if(close(0) == -1){ printf ("Error al cerrar el canal 0.\n"); 
         }
 
-        if(dup(pfd[0]) == -1){ printf("Error dup.\n"); 
+        if(dup(p1[0]) == -1){ printf("Error dup.\n"); 
         }
 
-        if((close(pfd[0])) == -1){ printf("Error al cerrar pfd[0].\n");
+        if((close(p1[0])) == -1){ printf("Error al cerrar pfd[0].\n");
         }
 
-        if((close(pfd[1])) == -1){ printf("Error al cerrar pfd[1].\n");
+        if((close(p1[1])) == -1){ printf("Error al cerrar pfd[1].\n");
         }
 
         if(close(1) == -1){ printf("Error al cerrar el canal 1.\n");
         }
 
-        if(dup(pfd2[1]) == -1){ printf("Error dup.\n");}
+        if(dup(p2[1]) == -1){ printf("Error dup.\n");}
 
-        if((close(pfd2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
+        if((close(p2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
         }
 
-        if((close(pfd2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
+        if((close(p2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
         }
 
         execlp("grep", "grep", "acaf00", NULL);
@@ -76,18 +78,18 @@ int main() {
     if((pid = fork()) == 0){
         if(close(0) == -1){ printf("Error al cerrar el canal 0.\n");}
 
-        if(dup(pfd2[0]) == -1){ error("Error dup.\n");}
+        if(dup(p2[0]) == -1){ error("Error dup.\n");}
 
-        if((close(pfd2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
+        if((close(p2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
         }
 
-        if((close(pfd2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
+        if((close(p2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
         }
 
-        if((close(pfd[0])) == -1){ printf("Error al cerrar pfd[0].\n");
+        if((close(p1[0])) == -1){ printf("Error al cerrar pfd[0].\n");
         }
 
-        if((close(pfd[1])) == -1){ printf("Error al cerrar pfd[1].\n");
+        if((close(p1[1])) == -1){ printf("Error al cerrar pfd[1].\n");
         }
 
         execlp("sort", "sort", NULL);
@@ -98,16 +100,16 @@ int main() {
 
     wait(NULL);
 
-    if((close(pfd[0])) == -1){ printf("Error al cerrar pfd[0].\n");
+    if((close(p1[0])) == -1){ printf("Error al cerrar pfd[0].\n");
     }
 
-    if((close(pfd[1])) == -1){ printf("Error al cerrar pfd[1].\n");
+    if((close(p1[1])) == -1){ printf("Error al cerrar pfd[1].\n");
     }
    
-    if((close(pfd2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
+    if((close(p2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
     }
 
-    if((close(pfd2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
+    if((close(p2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
     }
 
     return 0;
