@@ -9,30 +9,41 @@
 #include <sys/stat.h>
 #include <errno.h>
 
+#define MAX_BUF 512
+
 int main (int argc , char *argv[]){
 
   DIR *d;
   d=opendir(argv[1]);
-  char *path;    
-   
-  if (d == NULL){
-        printf("No se ha podido abrir");
-        return (0);
+
+
+  if (argc != 2){
+        fprintf(stderr, "Se esperaban 2 argumentos pero se recivieron %d\n", argc);
+        exit(-1);
   }
 
-  //el estilo gangnam es sin duda mi estilo preferido. dab.
-  sprintf(path, "%s/%s", argv[1], argv[1]);
-  struct dirent *dir;
-  
-  while(dir=readdir(d)){
-       if (dir->d_type == DT_DIR){
-          chmod( path, 0550);//Pello mira teteas (. Y .) 3==D ahahah mirarrona
-       }else if(dir->d_type == DT_REG){
-          chmod(path, 0022 );
-       }      
+  char buf1[MAX_BUF];
+  char path[MAX_BUF];
+
+  if (!d){
+        printf("Error al abrir el directorio");
+        perror(buf1);
+        exit (-2);
   }
-      
+
+  struct dirent *dir;
+  while(dir=readdir(d)){
+        sprintf(path, "%s/%s", argv[1], dir->d_name);
+        printf(path);
+        if (dir->d_type == DT_DIR){
+           chmod( path, 0550);
+        }else if(dir->d_type == DT_REG){
+           chmod(path, 0022);
+        }
+  }
+
  closedir(d);
+
  return(0);
 
 }
