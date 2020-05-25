@@ -24,7 +24,7 @@ int main (int argc , char *argv[]){
     int prog1 = system(argv[1]);
     read(1, buf1, 512);
     int prog2 = system(argv[1]);
-    reda(1,buf2,512);
+    read(1,buf2,512);
   
   if(strcmp(buf1,buf2) == 0 ){
       write(s_fd, buf1,512);
