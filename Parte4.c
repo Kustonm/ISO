@@ -41,7 +41,6 @@ int main() {
         }
 
         execlp("who", "who", NULL);
-        error("Error execlp.\n");
 
     } else if(pid == -1) {
     printf("No ha sido posible crear el primer hijo.\n");
