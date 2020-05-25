@@ -28,16 +28,16 @@ int main() {
           
         }
         if((close(p1[1])) == -1){ 
-            printf("Error al cerrar pfd[1].\n");
+            printf("Error al cerrar p1[1].\n");
         }
         if((close(p1[0])) == -1){
-          printf("Error al cerrar pfd[0].\n");
+          printf("Error al cerrar p1[0].\n");
         }
         if((close(p2[0])) == -1){
-          printf("Error al cerrar pfd2[0].\n");
+          printf("Error al cerrar p2[0].\n");
         }
         if((close(p2[1])) == -1){
-          printf("Error al cerrar pfd2[1].\n");
+          printf("Error al cerrar p2[1].\n");
         }
 
         execlp("who", "who", NULL);
@@ -53,10 +53,10 @@ int main() {
         if(dup(p1[0]) == -1){ printf("Error dup.\n"); 
         }
 
-        if((close(p1[0])) == -1){ printf("Error al cerrar pfd[0].\n");
+        if((close(p1[0])) == -1){ printf("Error al cerrar p1[0].\n");
         }
 
-        if((close(p1[1])) == -1){ printf("Error al cerrar pfd[1].\n");
+        if((close(p1[1])) == -1){ printf("Error al cerrar p1[1].\n");
         }
 
         if(close(1) == -1){ printf("Error al cerrar el canal 1.\n");
@@ -64,10 +64,10 @@ int main() {
 
         if(dup(p2[1]) == -1){ printf("Error dup.\n");}
 
-        if((close(p2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
+        if((close(p2[1])) == -1){ printf("Error al cerrar p2[1].\n");
         }
 
-        if((close(p2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
+        if((close(p2[0])) == -1){ printf("Error al cerrar p2[0].\n");
         }
 
         execlp("grep", "grep", "acaf00", NULL);
@@ -79,16 +79,16 @@ int main() {
 
         if(dup(p2[0]) == -1){ error("Error dup.\n");}
 
-        if((close(p2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
+        if((close(p2[0])) == -1){ printf("Error al cerrar p2[0].\n");
         }
 
-        if((close(p2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
+        if((close(p2[1])) == -1){ printf("Error al cerrar p2[1].\n");
         }
 
-        if((close(p1[0])) == -1){ printf("Error al cerrar pfd[0].\n");
+        if((close(p1[0])) == -1){ printf("Error al cerrar p1[0].\n");
         }
 
-        if((close(p1[1])) == -1){ printf("Error al cerrar pfd[1].\n");
+        if((close(p1[1])) == -1){ printf("Error al cerrar p1[1].\n");
         }
 
         execlp("sort", "sort", NULL);
@@ -99,16 +99,16 @@ int main() {
 
     wait(NULL);
 
-    if((close(p1[0])) == -1){ printf("Error al cerrar pfd[0].\n");
+    if((close(p1[0])) == -1){ printf("Error al cerrar p1[0].\n");
     }
 
-    if((close(p1[1])) == -1){ printf("Error al cerrar pfd[1].\n");
+    if((close(p1[1])) == -1){ printf("Error al cerrar p1[1].\n");
     }
    
-    if((close(p2[0])) == -1){ printf("Error al cerrar pfd2[0].\n");
+    if((close(p2[0])) == -1){ printf("Error al cerrar p2[0].\n");
     }
 
-    if((close(p2[1])) == -1){ printf("Error al cerrar pfd2[1].\n");
+    if((close(p2[1])) == -1){ printf("Error al cerrar p2[1].\n");
     }
 
     return 0;
