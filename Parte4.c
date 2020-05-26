@@ -18,7 +18,7 @@ int main() {
 
     pid = fork();    
     
-    if((pid == 0) {
+    if(pid == 0) {
         
         if(close(1) == -1){
           printf("Error al cerrar el canal 1.\n");
@@ -45,7 +45,7 @@ int main() {
     printf("No se a podiddo generear el primer subproceso \n");
     }
   
-    if((pid == 0) {
+    if(pid == 0) {
         if(close(0) == -1){ 
             printf ("Error al cerrar el canal 0.\n"); 
         }
@@ -70,7 +70,7 @@ int main() {
         execlp("grep", "grep", "acaf00", NULL);
 
     } else{ if(pid == -1){ 
-        printf("No se a podiddo generear el segundo subproceso \n".\n");}
+        printf("No se a podiddo generear el segundo subproceso.\n");}
 
     if((pid = fork()) == 0){
         if(close(0) == -1){ 
@@ -94,7 +94,7 @@ int main() {
         
 
     } else if(pid == -1){ 
-        printf("No se a podiddo generear el tercer subproceso \n".\n");
+        printf("No se a podiddo generear el tercer subproceso .\n");
     }
     wait(NULL);
     if((close(p1[0])) == -1){ 
@@ -115,3 +115,5 @@ int main() {
     return 0;
 }
 }
+
+
